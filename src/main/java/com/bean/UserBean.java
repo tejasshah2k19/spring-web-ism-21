@@ -1,11 +1,23 @@
 package com.bean;
 
+import org.hibernate.validator.constraints.Email;
+import org.hibernate.validator.constraints.NotBlank;
+
 public class UserBean {
 
 	int userId;
+
+	@NotBlank(message="Please Enter FirstName")
 	String firstName;
+
+	@NotBlank(message="Please Enter Email")
 	String email;
+
 	String password;
+
+	public UserBean() {
+		userId = (int) (Math.random() * 1000000);// 0 265623.21314655323 * 1000000
+	}
 
 	public int getUserId() {
 		return userId;

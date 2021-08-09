@@ -16,6 +16,10 @@
 </head>
 <body>
 	
+	
+	<br>
+	<a href="signup">Add More User</a>
+	<br>
 	<table class="table table-striped">
 		<thead>
 			<tr>
@@ -31,7 +35,11 @@
 					<td>${user.userId }</td>
 					<td>${user.firstName }</td>
 					<td>${user.email}</td>
-					<td>Delete</td>
+					<td>
+					<a href="deleteUser?userId=${user.userId}">  Delete </a>
+					<a href="deleteUserByPath/${user.userId}">  Delete </a>
+					<a href="edituser/${user.userId}">Edit</a>	
+					</td>
 				</tr>
 			</c:forEach>
 		</tbody>

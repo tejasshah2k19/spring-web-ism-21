@@ -1,3 +1,17 @@
+Date: 7-8-2021
+
 1) set userId max 6 digits 
 2) perform insert and delete in inMemory(collections) 
+-----------------------------------------
+Date: 9-8-2021
 
+1) taks 
+	isELIgnored="false" globally 
+2) predicate
+3) Email validation
+4) password max 16 min 8 
+5) firstName must not be blank and only alphabets 
+6) how to user hb-validator 7*
+7) add 2 field 1) gender male female radiobutton  
+	       2) hobby checkbox [ min 2 ] 
+-----------------------------------------
