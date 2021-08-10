@@ -40,8 +40,8 @@ public class RegistrationController {
 			return "Signup";
 		} else {
 
-			userDao.insertUser(user);
-
+			//userDao.insertUser(user);
+			userDao.saveUser(user);
 			System.out.println("save user-------------------");
 
 			model.addAttribute("myUser", user);
@@ -52,7 +52,7 @@ public class RegistrationController {
 	@GetMapping("/users")
 	public String listUsers(Model model) {
 
-		model.addAttribute("users", userDao.getAllUsers());
+		model.addAttribute("users", userDao.getUsers1());
 		return "ListUsers";
 	}
 
@@ -70,7 +70,7 @@ public class RegistrationController {
 
 	@GetMapping("/deleteUserByPath/{userId}") // /12/33/sdfsdfsdf/sdfsdf/3434
 	public String deleteUserByPath(@PathVariable("userId") int userId) {
-		boolean flag = userDao.deleteUser(userId);
+		boolean flag = userDao.delUser(userId);
 
 		return "redirect:/users";
 	}

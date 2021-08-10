@@ -15,3 +15,70 @@ Date: 9-8-2021
 7) add 2 field 1) gender male female radiobutton  
 	       2) hobby checkbox [ min 2 ] 
 -----------------------------------------
+
+github --> 
+	expense 
+	
+	payee : jaibhawani { db }{create}   
+	type:  food {db}{create} 
+	label: birthdayparty,unwanted 
+	amount : 2500
+	accountType:  cash  
+	date time :10-8-2021  4:00 PM 
+	reciept : 	
+	
+	account :
+		name :SBI2560 
+		bal : 25000
+		
+		name: cash 
+		bal : 5000 [2500]
+				
+	user
+		firstName
+		email
+		password
+		role [ enum 1=Admin 2=User] 
+	
+	payee:
+		jaybhavani
+		apollo
+		dmart 
+		royalTechnoSoftPLtd 
+	
+	exp_type:
+		food 
+		fuel
+		grcoery
+		selfcare
+		medicien 
+				
+	label 		 
+		labelId name 
+		1		unwanted party
+		2		birthday 
+		3		g2g 
+				   
+	
+1) signup
+2) login 
+3) logout 
+4) forgetpassword { will send otp on email } 
+
+
+
+
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
