@@ -23,7 +23,7 @@
 		<div class="row">
 			<div class="col-md-6">
 				<h2>Signup</h2>
-				<s:form action="saveuser" method="post" modelAttribute="user">
+				<s:form action="saveuser" method="post"  enctype="mutlipart/form-data" modelAttribute="user">
 
 					<div class="form-group">
 						<label for="email">FirstName:</label>
@@ -44,7 +44,15 @@
 							class="form-control" id="pwd" placeholder="Enter password"
 							path="password"/>
 					</div>
-
+	
+					<div class="form-group">
+						<label for="pwd">Profile:</label> <input type="file" 
+							class=""  placeholder="select your pic"
+							name="profile"/>
+					</div>
+	
+	
+	
 					<button type="submit" class="btn btn-primary">Submit</button>
 				</s:form>
 			</div>

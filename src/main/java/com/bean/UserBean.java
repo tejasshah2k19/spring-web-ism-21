@@ -1,24 +1,53 @@
 package com.bean;
 
-import org.hibernate.validator.constraints.Email;
+import javax.servlet.http.Part;
+
 import org.hibernate.validator.constraints.NotBlank;
 
 public class UserBean {
 
 	int userId;
 
-	@NotBlank(message="Please Enter FirstName")
+	@NotBlank(message = "Please Enter FirstName")
 	String firstName;
 
-	@NotBlank(message="Please Enter Email")
+	@NotBlank(message = "Please Enter Email")
 	String email;
 
 	String password;
+	String roleName;
+	
+	String profilePath;
+	
+	
+
+ 
+
+	public String getProfilePath() {
+		return profilePath;
+	}
+
+
+	public void setProfilePath(String profilePath) {
+		this.profilePath = profilePath;
+	}
+
+
+	public String getRoleName() {
+		return roleName;
+	}
+
+
+	public void setRoleName(String roleName) {
+		this.roleName = roleName;
+	}
+
 
 	public UserBean() {
 		userId = (int) (Math.random() * 1000000);// 0 265623.21314655323 * 1000000
 	}
 
+	
 	public int getUserId() {
 		return userId;
 	}

@@ -11,6 +11,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
 
+import com.bean.RoleBean;
 import com.bean.UserBean;
 
 @Repository
@@ -75,7 +76,9 @@ public class UserDao {
 	}
 
 	public List<UserBean> getUsers1() {
-		List<UserBean> users = stmt.query("select * from users", new BeanPropertyRowMapper<UserBean>(UserBean.class));
+		List<UserBean> users = stmt.query(
+				"select r.rolename,u.* from users u inner join role r on u.roleid = r.roleid",
+				new BeanPropertyRowMapper<UserBean>(UserBean.class));
 		return users;
 	}
 
@@ -88,7 +91,15 @@ public class UserDao {
 			user.setEmail(rs.getString("email"));
 			user.setPassword(rs.getString("password"));
 			user.setFirstName(rs.getString("firstName"));
-
+			user.setRoleName(rs.getString("roleName"));
+			
+			
+//			RoleBean role  = new RoleBean();
+//			role.setRoleId(rs.getInt("roleId"));
+//			role.setRoleName(rs.getString("roleName"));
+//			user.setRolerole);
+//			
+			
 			return user;
 		}
 

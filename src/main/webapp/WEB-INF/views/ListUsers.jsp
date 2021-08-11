@@ -26,6 +26,7 @@
 				<th>UserId</th>
 				<th>FirstName</th>
 				<th>Email</th>
+				<th>RoleName</th>
 				<th>Action</th>
 			</tr>
 		</thead>
@@ -35,6 +36,7 @@
 					<td>${user.userId }</td>
 					<td>${user.firstName }</td>
 					<td>${user.email}</td>
+					<td>${user.roleName}</td>
 					<td>
 					<a href="deleteUser?userId=${user.userId}">  Delete </a>
 					<a href="deleteUserByPath/${user.userId}">  Delete </a>

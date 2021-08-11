@@ -65,7 +65,11 @@ github -->
 3) logout 
 4) forgetpassword { will send otp on email } 
 
-
+-------------------------------------------------------
+pom.xml 
+	commons-fileupload 
+	commons-io 
+	
 
 
 	

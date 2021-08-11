@@ -1,7 +1,14 @@
 package com.controller;
 
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+
+import javax.servlet.annotation.MultipartConfig;
+import javax.servlet.http.Part;
 import javax.validation.Valid;
 
+import org.apache.commons.io.FileUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -13,15 +20,20 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.bean.UserBean;
 import com.dao.UserDao;
+import com.service.ImageService;
 
 @Controller
 public class RegistrationController {
 
 	@Autowired
 	UserDao userDao;
+
+	@Autowired
+	ImageService imgService;
 
 	@RequestMapping(value = "/signup", method = RequestMethod.GET)
 	public String signup(Model model) {
@@ -31,16 +43,17 @@ public class RegistrationController {
 	}
 
 	@RequestMapping(value = "/saveuser", method = RequestMethod.POST)
-	public String saveUser(@Valid @ModelAttribute("user") UserBean user, BindingResult result, Model model) {
+	public String saveUser(@Valid @ModelAttribute("user") UserBean user, BindingResult result,
+			@RequestParam("profile") MultipartFile file, Model model) {
 
-		// local
-		 
 		if (result.hasErrors()) {
+			System.out.println(result);
 			model.addAttribute("user", user);
 			return "Signup";
 		} else {
 
-			//userDao.insertUser(user);
+			user.setProfilePath(imgService.uploadImage(file, "users"));
+			// userDao.insertUser(user);
 			userDao.saveUser(user);
 			System.out.println("save user-------------------");
 
@@ -51,7 +64,6 @@ public class RegistrationController {
 
 	@GetMapping("/users")
 	public String listUsers(Model model) {
-
 		model.addAttribute("users", userDao.getUsers1());
 		return "ListUsers";
 	}
