@@ -40,8 +40,8 @@
 
 	<bean
 		class="org.springframework.web.multipart.commons.CommonsMultipartResolver"
-		name="mpf">
-		<property name="maxUploadSize" value="50000000">
+		name="multipartResolver">
+		<property name="maxUploadSize" value="5500000">
 		</property>
 	</bean>
 

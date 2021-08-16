@@ -1,14 +1,7 @@
 package com.controller;
 
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.IOException;
-
-import javax.servlet.annotation.MultipartConfig;
-import javax.servlet.http.Part;
 import javax.validation.Valid;
 
-import org.apache.commons.io.FileUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -22,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.bean.RoleBean;
 import com.bean.UserBean;
 import com.dao.UserDao;
 import com.service.ImageService;
@@ -43,17 +37,24 @@ public class RegistrationController {
 	}
 
 	@RequestMapping(value = "/saveuser", method = RequestMethod.POST)
-	public String saveUser(@Valid @ModelAttribute("user") UserBean user, BindingResult result,
-			@RequestParam("profile") MultipartFile file, Model model) {
+	public String saveUser(@ModelAttribute("user") @Valid UserBean user, BindingResult result, Model model,
+			@RequestParam("imgProfile") MultipartFile file) {
 
+		System.out.println(user.getEmail());
+		System.out.println(user.getFirstName());
+		System.out.println(file.getOriginalFilename());
 		if (result.hasErrors()) {
 			System.out.println(result);
 			model.addAttribute("user", user);
 			return "Signup";
 		} else {
 
-			user.setProfilePath(imgService.uploadImage(file, "users"));
+			// user.setProfilePath(imgService.uploadImage(file, "users"));
 			// userDao.insertUser(user);
+			RoleBean role = new RoleBean();
+			role.setRoleId(1);
+
+			user.setRole(role);
 			userDao.saveUser(user);
 			System.out.println("save user-------------------");
 

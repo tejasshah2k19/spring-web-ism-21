@@ -1,14 +1,20 @@
 package com.dao;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.PreparedStatementCreator;
 import org.springframework.jdbc.core.RowMapper;
+import org.springframework.jdbc.support.GeneratedKeyHolder;
+import org.springframework.jdbc.support.KeyHolder;
 import org.springframework.stereotype.Repository;
 
 import com.bean.RoleBean;
@@ -20,13 +26,31 @@ public class UserDao {
 	@Autowired
 	JdbcTemplate stmt;
 
-	public void saveUser(UserBean user) {
+	public int saveUser(final UserBean user) {
 		// exeu -> state -->
 		// exeq --> read
 
-		stmt.update("insert into users (firstName,email,password) values (?,?,?)", user.getFirstName(), user.getEmail(),
-				user.getPassword());
+//		stmt.update("insert into users (firstName,email,password) values (?,?,?)", user.getFirstName(), user.getEmail(),
+//				user.getPassword()); // insert ->  1 
+//	
 
+		// method local inner class ---> final
+		KeyHolder keyHolder = new GeneratedKeyHolder();
+		stmt.update(new PreparedStatementCreator() {
+
+			public PreparedStatement createPreparedStatement(Connection con) throws SQLException {
+				PreparedStatement pstmt = con
+						.prepareStatement("insert into users (firstName,email,password,roleId) values (?,?,?,?)",Statement.RETURN_GENERATED_KEYS);
+				pstmt.setString(1, user.getFirstName());
+				pstmt.setString(2, user.getEmail());
+				pstmt.setString(3, user.getPassword());
+				pstmt.setInt(4, user.getRole().getRoleId());
+				return pstmt;
+			}
+		}, keyHolder);
+		int userId = keyHolder.getKey().intValue(); 
+		System.out.println(userId);
+		return userId;
 	}
 
 	ArrayList<UserBean> users = new ArrayList<UserBean>();
@@ -76,8 +100,7 @@ public class UserDao {
 	}
 
 	public List<UserBean> getUsers1() {
-		List<UserBean> users = stmt.query(
-				"select r.rolename,u.* from users u inner join role r on u.roleid = r.roleid",
+		List<UserBean> users = stmt.query("select r.rolename,u.* from users u inner join role r on u.roleid = r.roleid",
 				new BeanPropertyRowMapper<UserBean>(UserBean.class));
 		return users;
 	}
@@ -91,15 +114,14 @@ public class UserDao {
 			user.setEmail(rs.getString("email"));
 			user.setPassword(rs.getString("password"));
 			user.setFirstName(rs.getString("firstName"));
-			user.setRoleName(rs.getString("roleName"));
-			
-			
-//			RoleBean role  = new RoleBean();
-//			role.setRoleId(rs.getInt("roleId"));
-//			role.setRoleName(rs.getString("roleName"));
-//			user.setRolerole);
-//			
-			
+//			user.setRoleName(rs.getString("roleName"));
+
+			RoleBean role  = new RoleBean();
+			role.setRoleId(rs.getInt("roleId"));
+			role.setRoleName(rs.getString("roleName"));
+			user.setRole(role);
+
+
 			return user;
 		}
 

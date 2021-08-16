@@ -61,7 +61,7 @@ github -->
 				   
 	
 1) signup
-2) login 
+2) login { admin -- dashboard user---home } 
 3) logout 
 4) forgetpassword { will send otp on email } 
 
@@ -70,8 +70,40 @@ pom.xml
 	commons-fileupload 
 	commons-io 
 	
+	
+----------	
+13-8-2021 
+----------
+
+[ Accounts,cate,            ,expense,Logout]
+   No account found please create account
+   
+   CASH
+   CreditCart2002
+   CreditCart1009	
+   
+   
+ click --> expense 
+ 
+ form
+ 	[  ]
+ 	[  ] 
+    [addExpense]
+ 
+ list of all expense current month sorted by latest 
+
+https://docs.google.com/spreadsheets/d/1LxoZt2VN_EYCTt9qRveo95BncvRqpWmpETbgFypOBDA/edit?usp=sharing
 
 
+ 
+ 
+ 
+ 
+ 
+   
+
+	
+	
 	
 	
 	

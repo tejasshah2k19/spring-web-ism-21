@@ -13,15 +13,23 @@ public class UserBean {
 
 	@NotBlank(message = "Please Enter Email")
 	String email;
-
 	String password;
-	String roleName;
-	
 	String profilePath;
+	RoleBean role;
 	
 	
 
  
+
+	public RoleBean getRole() {
+		return role;
+	}
+
+
+	public void setRole(RoleBean role) {
+		this.role = role;
+	}
+
 
 	public String getProfilePath() {
 		return profilePath;
@@ -32,16 +40,7 @@ public class UserBean {
 		this.profilePath = profilePath;
 	}
 
-
-	public String getRoleName() {
-		return roleName;
-	}
-
-
-	public void setRoleName(String roleName) {
-		this.roleName = roleName;
-	}
-
+ 
 
 	public UserBean() {
 		userId = (int) (Math.random() * 1000000);// 0 265623.21314655323 * 1000000
