@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -13,6 +14,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.bean.RoleBean;
@@ -28,6 +30,13 @@ public class RegistrationController {
 
 	@Autowired
 	ImageService imgService;
+
+	@GetMapping("/checkemail/{email}")
+	@ResponseBody
+	public boolean checkEmail(@PathVariable("email") String email) {
+		boolean ans = userDao.checkDuplicateEmail(email);
+		return ans;//
+	}
 
 	@RequestMapping(value = "/signup", method = RequestMethod.GET)
 	public String signup(Model model) {
@@ -65,6 +74,8 @@ public class RegistrationController {
 
 	@GetMapping("/users")
 	public String listUsers(Model model) {
+		String x = null;
+		x.length();
 		model.addAttribute("users", userDao.getUsers1());
 		return "ListUsers";
 	}
@@ -101,5 +112,17 @@ public class RegistrationController {
 		System.out.println(user.getEmail());
 		return "redirect:/users";
 	}
+//
+//	@ExceptionHandler({ NullPointerException.class, NumberFormatException.class })
+//	public String errorHadlerN(Model model) {
+//		//
+//		return "Error";
+//	}
+//
+//	@ExceptionHandler({ ArrayIndexOutOfBoundsException.class, StringIndexOutOfBoundsException.class })
+//	public String errorHadlerI(Model model) {
+//		//
+//		return "Error";
+//	}
 
 }

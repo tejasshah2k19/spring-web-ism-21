@@ -39,8 +39,9 @@ public class UserDao {
 		stmt.update(new PreparedStatementCreator() {
 
 			public PreparedStatement createPreparedStatement(Connection con) throws SQLException {
-				PreparedStatement pstmt = con
-						.prepareStatement("insert into users (firstName,email,password,roleId) values (?,?,?,?)",Statement.RETURN_GENERATED_KEYS);
+				PreparedStatement pstmt = con.prepareStatement(
+						"insert into users (firstName,email,password,roleId) values (?,?,?,?)",
+						Statement.RETURN_GENERATED_KEYS);
 				pstmt.setString(1, user.getFirstName());
 				pstmt.setString(2, user.getEmail());
 				pstmt.setString(3, user.getPassword());
@@ -48,7 +49,7 @@ public class UserDao {
 				return pstmt;
 			}
 		}, keyHolder);
-		int userId = keyHolder.getKey().intValue(); 
+		int userId = keyHolder.getKey().intValue();
 		System.out.println(userId);
 		return userId;
 	}
@@ -116,11 +117,10 @@ public class UserDao {
 			user.setFirstName(rs.getString("firstName"));
 //			user.setRoleName(rs.getString("roleName"));
 
-			RoleBean role  = new RoleBean();
+			RoleBean role = new RoleBean();
 			role.setRoleId(rs.getInt("roleId"));
 			role.setRoleName(rs.getString("roleName"));
 			user.setRole(role);
-
 
 			return user;
 		}
@@ -142,6 +142,17 @@ public class UserDao {
 		}
 
 		return user;
+	}
+
+	public boolean checkDuplicateEmail(String email) {
+
+		List<UserBean> users = stmt.query("select * from users,role where email like ? and role.roleId = users.roleId",
+				new UserRowMapper(), email);
+		System.out.println(users.size());
+		if (users.size() == 0)
+			return false;
+		else
+			return true;
 	}
 
 }

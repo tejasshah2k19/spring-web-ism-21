@@ -23,21 +23,22 @@
 		<div class="row">
 			<div class="col-md-6">
 				<h2>Signup</h2>
-			
-				<s:form action="saveuser" method="post"
+
+				<s:form action="saveuser" name="reg" method="post"
 					enctype="multipart/form-data" modelAttribute="user">
 					<div class="form-group">
 						<label for="firstName">FirstName:</label>
-						<s:input cssClass="form-control" id="email"
-							placeholder="Enter firstname" path="firstName"></s:input>
+						<s:input cssClass="form-control" placeholder="Enter firstname"
+							path="firstName"></s:input>
 						<s:errors path="firstName" cssClass="error"></s:errors>
 					</div>
 
 					<div class="form-group">
 						<label for="email">Email:</label>
 						<s:input type="text" class="form-control" id="email"
-							placeholder="Enter email" path="email" />
+							placeholder="Enter email" path="email" name="email" />
 						<s:errors path="email" cssClass="error"></s:errors>
+						<span id="emailError"></span>
 					</div>
 					<div class="form-group">
 						<label for="pwd">Password:</label>
@@ -51,15 +52,55 @@
 							name="imgProfile" />
 					</div>
 
-				
+
 
 					<button type="submit" class="btn btn-primary">Submit</button>
 				</s:form>
 			</div>
 		</div>
 	</div>
+	<script src="https://code.jquery.com/jquery-3.6.0.js"
+		integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk="
+		crossorigin="anonymous"></script>
 
+	<script type="text/javascript">
+		function checkEmail() {
+			let email = document.reg.email.value;
+			console.log(email);
 
+			$.get("checkemail/" + email, function(data) {
+				console.log(data);
+				if (data) {
+				 	$("#emailError").text("Email Already In Use");
+				}else{
+					$("#emailError").text("");
+				}
+			}).fail(function(err) {
+				console.log("error"+err);
+			});
 
+		}
+
+		$(document).ready(function() {
+			$("#email").blur(function() {
+				checkEmail();
+			})
+
+		})
+	</script>
 </body>
 </html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
