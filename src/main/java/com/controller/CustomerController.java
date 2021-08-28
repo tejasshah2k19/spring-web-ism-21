@@ -25,11 +25,9 @@ public class CustomerController {
 
 		ResponseBean<CustomerBean> res = new ResponseBean<>();
 		customerDao.addCustomer(customer);
-
 		res.setData(customer);
 		res.setMessage("customer save");
 		res.setStatus(200);
-
 		return res;
 	}
 
