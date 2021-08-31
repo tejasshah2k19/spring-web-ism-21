@@ -1,13 +1,28 @@
 package com.bean;
 
-public class ProductBean {
+public class CartBean {
 
+	int cartId;
+	int customerId;
 	int productId;
+	
+	
 	String name;
 	float price;
-	int qty;
-	//authToken
-
+	
+	
+	public int getCartId() {
+		return cartId;
+	}
+	public void setCartId(int cartId) {
+		this.cartId = cartId;
+	}
+	public int getCustomerId() {
+		return customerId;
+	}
+	public void setCustomerId(int customerId) {
+		this.customerId = customerId;
+	}
 	public int getProductId() {
 		return productId;
 	}
@@ -25,12 +40,6 @@ public class ProductBean {
 	}
 	public void setPrice(float price) {
 		this.price = price;
-	}
-	public int getQty() {
-		return qty;
-	}
-	public void setQty(int qty) {
-		this.qty = qty;
 	}
 	
 }

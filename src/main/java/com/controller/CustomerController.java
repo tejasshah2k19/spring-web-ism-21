@@ -5,14 +5,17 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.bean.CustomerBean;
+import com.bean.LoginBean;
 import com.bean.ResponseBean;
 import com.dao.CustomerDao;
 import com.util.TokenGenerator;
 
 @RestController
+@RequestMapping("/api")
 public class CustomerController {
 	@Autowired
 	CustomerDao customerDao;
@@ -20,7 +23,7 @@ public class CustomerController {
 	@Autowired
 	TokenGenerator tokenGenerator;
 
-	@PostMapping("/customers")
+	@PostMapping("/signup")
 	public ResponseBean<CustomerBean> addCustomer(@RequestBody CustomerBean customer) {
 
 		ResponseBean<CustomerBean> res = new ResponseBean<>();
@@ -32,10 +35,11 @@ public class CustomerController {
 	}
 
 	@PostMapping("/authenticate")
-	public ResponseBean<CustomerBean> authenticate(@RequestBody CustomerBean customer) {
+	public ResponseBean<CustomerBean> authenticate(@RequestBody LoginBean login) {
+		System.out.println("inside --authenticate-----");
 		ResponseBean<CustomerBean> res = new ResponseBean<>();
 
-		customer = customerDao.authenticate(customer.getEmail(), customer.getPassword());
+		CustomerBean customer = customerDao.authenticate(login.getEmail(), login.getPassword());
 		if (customer == null) {
 			res.setStatus(-1);
 			res.setData(customer);

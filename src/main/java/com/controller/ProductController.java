@@ -8,11 +8,15 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestHeader;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.bean.CustomerBean;
 import com.bean.ProductBean;
 import com.bean.ResponseBean;
+import com.dao.CustomerDao;
 import com.dao.ProductDao;
 
 @RestController
@@ -21,27 +25,45 @@ public class ProductController {
 	@Autowired
 	ProductDao productDao;
 
-	 
-	@PostMapping("/products")
-	public ResponseBean<ProductBean> addProduct(@RequestBody ProductBean product) {
+	@Autowired
+	CustomerDao customerDao;
 
+	@PostMapping("/products")
+	public ResponseBean<ProductBean> addProduct(@RequestBody ProductBean product,
+			@RequestHeader("authToken") String authToken) {
+		// token print
+		System.out.println(authToken);
 		ResponseBean<ProductBean> resp = new ResponseBean<>();
 
-		boolean status = productDao.insertProduct(product);
+		if (customerDao.getCustomerByToken(authToken) == null) {
 
-		if (status) {
-			resp.setStatus(200);
-			resp.setMessage("Product saved");
-			resp.setData(product);      
-
-		} else {
 			resp.setStatus(-1);
-			resp.setMessage("Product not saved");
+			resp.setMessage("Invalid Access");
 			resp.setData(product);
+			return resp;
+		} else {
+
+			System.out.println(product.getName());
+			System.out.println(product.getPrice());
+//  		System.out.println(??);
+
+			boolean status = productDao.insertProduct(product);
+
+			if (status) {
+				resp.setStatus(200);
+				resp.setMessage("Product saved");
+				resp.setData(product);
+
+			} else {
+				resp.setStatus(-1);
+				resp.setMessage("Product not saved");
+				resp.setData(product);
+			}
+			return resp;
 		}
 
-		return resp;
 	}
+
 	@GetMapping("/products")
 	public ResponseBean<List<ProductBean>> getAllProducts() {
 		ResponseBean<List<ProductBean>> res = new ResponseBean<>();
@@ -50,24 +72,22 @@ public class ProductController {
 		res.setStatus(200);
 		res.setMessage("Products Retrieved");
 		res.setData(products);
-		
-		
+
 		return res;
 	}
-	
-	
+
 	@DeleteMapping("/products/{productId}")
-	public ResponseBean<ProductBean> deleteProdcutById(@PathVariable("productId") int productId){
+	public ResponseBean<ProductBean> deleteProdcutById(@PathVariable("productId") int productId) {
 
 		ResponseBean<ProductBean> res = new ResponseBean<>();
-		
+
 		ProductBean product = productDao.deleteProductById(productId);
-		
-		if(product == null) {
+
+		if (product == null) {
 			res.setData(null);
 			res.setMessage("Invalid product Id");
 			res.setStatus(-1);
-		}else {
+		} else {
 			res.setData(product);
 			res.setMessage("Product removed");
 			res.setStatus(200);
@@ -76,8 +96,3 @@ public class ProductController {
 	}
 
 }
-
-
-
-
-

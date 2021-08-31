@@ -1,11 +1,23 @@
 package com.bean;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonProperty.Access;
+
 public class CustomerBean {
 
+	
+	@JsonProperty(access = Access.WRITE_ONLY)
 	int customerId;
+	
+	
 	String firstName;
 	String email;
+
+	
+	@JsonProperty(access = Access.WRITE_ONLY)
 	String password;
+	
+	
 	String token;
 
 	
