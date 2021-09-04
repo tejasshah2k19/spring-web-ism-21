@@ -169,7 +169,7 @@ public class UserCRUD {
 
 	void listUsers() {
 
-		Session session = sf.openSession();
+		Session session = sf.openSession();			//select * from  users
 		List<UserEntity> users = session.createQuery("From UserEntity", UserEntity.class).getResultList();
 
 		System.out.println("UserId\tfirstName\temail\tpassword");
