@@ -21,7 +21,7 @@
 		<mapping resource="user.hbm.xml" />
 		<mapping resource="onetoone.hbm.xml" />
 		<mapping resource="onetomany.hbm.xml" />
-
+		<mapping resource="manytomany.hbm.xml"/>
 	</session-factory>
 
 

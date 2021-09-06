@@ -4,6 +4,8 @@ public class StockDetailEntity {
 
 	int stockDetailId;
 	float price;
+
+	
 	float allTimeHighPrice;
 	float allTimeLowPrice;
 

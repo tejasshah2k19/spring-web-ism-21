@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+
+
+
+<hibernate-mapping>
+	<class name="com.entity.manytomany.DeveloperEntity"
+		table="developers">
+		<id name="developerId">
+			<generator class="increment"></generator>
+		</id>
+		<property name="name"></property>
+		<set name="projects" table="dev_project" cascade="all"
+			inverse="false" fetch="select" lazy="true">
+			<key column="developerId"></key>
+
+			<many-to-many
+				class="com.entity.manytomany.ProjectEntity">
+				<column name="projectId"></column>
+			</many-to-many>
+		</set>
+
+	</class>
+
+	<class name="com.entity.manytomany.ProjectEntity"
+		table="projects">
+		<id name="projectId">
+			<generator class="increment">
+			</generator>
+		</id>
+		<property name="projectName"></property>
+		<set name="developers" table="dev_project" inverse="true"
+			fetch="select">
+			<key>
+				<column name="projectId"></column>
+			</key>
+			<many-to-many
+				class="com.entity.manytomany.DeveloperEntity">
+				<column name="developerId"></column>
+			</many-to-many>
+
+		</set>
+	</class>
+</hibernate-mapping>
