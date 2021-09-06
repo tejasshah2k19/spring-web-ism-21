@@ -18,8 +18,10 @@
 		<property name="hibernate.show_sql">true</property>
 		<property name="hibernate.dialect">org.hibernate.dialect.MySQL5Dialect</property>
 
-		<mapping resource="user.hbm.xml"  />
-		<mapping  resource="onetoone.hbm.xml" />
+		<mapping resource="user.hbm.xml" />
+		<mapping resource="onetoone.hbm.xml" />
+		<mapping resource="onetomany.hbm.xml" />
+
 	</session-factory>
 
 
