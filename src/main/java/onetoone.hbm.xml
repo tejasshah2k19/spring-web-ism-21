@@ -10,7 +10,7 @@
 		<id name="stockId">
 			<generator class="increment"></generator>
 		</id>
-		<property name="stockName"></property>
+		<property name="stockName" ></property>
 		<property name="sector"></property>
 
 		<one-to-one name="stockDetail" cascade="all"></one-to-one>

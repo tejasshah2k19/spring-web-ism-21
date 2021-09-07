@@ -117,7 +117,7 @@ public class UserCRUD {
 
 			} catch (Exception e) {
 				tx.rollback();
-				System.out.println("Sometinh went wrong !!! " + e.getMessage());
+				System.out.println("Something went wrong !!! " + e.getMessage());
 			}
 
 		}
@@ -138,7 +138,7 @@ public class UserCRUD {
 
 			System.out.println("Existing value : firstName : " + user.getFirstName());
 			System.out.println("Do you want to update firstname?1 for yes?");
-			int userChoice = scr.nextInt();
+			int userChoice = scr.nextInt();//1
 			if (userChoice == 1) {
 				System.out.println("Enter new Firstname");
 				user.setFirstName(scr.next());
@@ -159,7 +159,7 @@ public class UserCRUD {
 
 			} catch (Exception e) {
 				tx.rollback();
-				System.out.println("Sometinh went wrong !!! " + e.getMessage());
+				System.out.println("Something went wrong !!! " + e.getMessage());
 			}
 
 		}
