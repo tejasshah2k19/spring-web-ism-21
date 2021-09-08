@@ -1,0 +1,204 @@
+How hb map java data type to sql data type 
+
+byte				tinyint 
+int					integer 
+long				BIGINT 
+short				smallint 
+char				char(1)
+String				varchar
+java.util.Calendar	timestamp
+j.u.Date			date
+j.s.Date			date 
+Time				time 
+
+
+------------------------------
+
+built-in-generators 
+
+increment 
+
+assigned 
+
+sequence 
+
+native 
+
+hilo 
+
+
+identity 
+
+-----------------------------------
+dialects :-
+------------------------------------------------
+
+@GeneratedValue 
+
+primary key -> value --> auto generated  | 
+
+AUTO { default } {seq ,table }  
+IDENTITY
+SEQUENCE
+TABLE 
+
+HB-5 
+1) numeric value 
+2) UUID -> UUIDGenerator  
+
+class User {
+
+	@Id
+	@GeneratedValue
+	//int userId; // numeric --> sequence | table 
+	UUID userId;// uuid - UUIDGenerator  	
+}
+
+8gkyjfk3-8588-r566-87fd-25rtr6dgs326
+
+
+IDENTITY 
+---------
+IdentityGenerator - auto-increment 
+*you can't update records in batch 
+
+
+SEQ*[suggested by hibernate ]  
+------
+if your db does not support sequence then it will use table. 
+
+@Id
+@GeneratedValue(g="s",parameters = {}
+
+
+TABLE [ try to avoid ] 
+------
+cur 3
+next 4
+
+50 insert 
+
+------------------------------------------------------------------------------
+CustomGenerator 
+------------------------------------------------------------------------------
+@Entity
+@Table
+@Column
+@Id
+@GeneratedValue 
+@Transient 
+@OrderBy 
+
+class User{
+ 
+	String firstName;
+	String password;
+	
+	@Transient 
+	String token; 
+
+	@OrderBy("orderDate asc");
+	Set<Orders> orders;
+}
+
+------------------------------------------------------------------------------
+1 to 1 
+Customer - CustomerProfile 
+
+Customer 
+custId(pk) custName XXX 
+1			X
+2			Y
+
+CustomerProfile 
+customerProfileId(pK) 	city   doj   status custId(fk)
+10						 AA		XX		XX	  1 
+20						 BB		YY		YY	  2 
+
+			or 
+			
+			Customer 
+Customer 
+custId(pk) custName XXX 
+1			X
+2			Y
+
+CustomerProfile 
+customerProfileId(pK) 	city   doj   status 
+1 						 AA		XX		XX	    
+2 						 BB		YY		YY	    
+
+
+@PrimaryKeyJoinColumn  [ associated entities are going to share their pk]
+@JoinColumn 
+
+class Customer {
+	
+	@Id
+	@G 
+	@PrimaryKeyJoinColumn*
+	int customerId;
+	
+	
+	@OneToOne 
+	@PrimaryKeyJoinColumn*  
+
+}
+
+class Customer {
+	
+	@Id
+	@G 
+	int customerId;
+	
+	
+	@OneToOne
+	@JoinColumn(name="customerId")*  
+
+}
+
+--------------------------------------------------------
+
+FetchMode[select,join,subselect] 
+FetchType[eager,lazy]  
+
+fetch="select" , "join" , "subselect"
+batch-size="25" 
+
+fetch="select"
+@Fetch(FetchMode.SELECT) 
+
+
+fetch="join"
+@Fetch(FetchMode.JOIN)
+
+
+batch-size="20"
+@BatchSize(size=20) 
+
+class Customer{
+
+	@OneToMany(fetch=FetchMode.SELECT)//LAZY  
+	Set<Orders> orders; 
+	
+	or 
+	
+	
+	@OneToMany(fetch=FetchMode.SELECT,batch-size="20")//LAZY  
+	Set<Orders> orders; 
+} 
+
+Customer cust = session.get(Customer.class,12);
+
+select => lazy | eager 
+join => eager
+subselect*  
+
+
+
+
+
+
+
+
+
