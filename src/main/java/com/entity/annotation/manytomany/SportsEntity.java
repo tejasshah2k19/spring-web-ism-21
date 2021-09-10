@@ -20,8 +20,9 @@ public class SportsEntity {
 	int sportsId;
 
 	String sportsName;
-	@ManyToMany(cascade= {CascadeType.ALL})
-	@JoinTable(name="sports_player",joinColumns= {@JoinColumn(name="sportId")},inverseJoinColumns= {@JoinColumn(name="playerId")})
+	@ManyToMany(cascade = { CascadeType.ALL })
+	@JoinTable(name = "sports_player", joinColumns = { @JoinColumn(name = "sportId") }, inverseJoinColumns = {
+			@JoinColumn(name = "playerId") })
 	Set<PlayerEntity> players;
 
 	public int getSportsId() {

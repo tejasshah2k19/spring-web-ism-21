@@ -13,7 +13,7 @@
 		</id>
 		<property name="firstName"></property>
 
-		<list name="orders" cascade="all">
+		<list name="orders" cascade="all" >
 			<key column="customerId"></key>
 			<list-index column="myindex"></list-index>
 			<one-to-many class="com.entity.onetomany.OrderEntity" />

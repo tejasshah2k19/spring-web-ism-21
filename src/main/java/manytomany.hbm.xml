@@ -13,7 +13,7 @@
 		</id>
 		<property name="name"></property>
 		<set name="projects" table="dev_project" cascade="all"
-			inverse="false" fetch="select" lazy="true">
+			  fetch="select" lazy="true">
 			<key column="developerId"></key>
 
 			<many-to-many

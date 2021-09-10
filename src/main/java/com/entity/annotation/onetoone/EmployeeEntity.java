@@ -15,7 +15,7 @@ public class EmployeeEntity {
 
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
-	@PrimaryKeyJoinColumn // 
+	//@PrimaryKeyJoinColumn // 
 	int empId;
 	
 	//@JoinColumn--> pk or ck 
@@ -25,7 +25,9 @@ public class EmployeeEntity {
 	
 	String name;
 	
-	@OneToOne(targetEntity=AddressEntity.class,cascade=CascadeType.ALL)
+	
+	@OneToOne(mappedBy="employee",cascade=CascadeType.ALL)
+	@PrimaryKeyJoinColumn
 	AddressEntity address;
 
 	public int getEmpId() {
