@@ -1,0 +1,75 @@
+pom.xml 
+
+	1)  spring web 
+	2)  spring data jpa 
+	3)  driver - pg driver 
+	4)  devtools
+	5)  tomca embed jasper 
+	
+	
+	
+application.properties 
+
+	db connection
+	
+	jpa-hibernate 
+	
+	jsp-view 
+	
+
+controller - folder 
+	SessionController 
+			signup 
+			saveUser 
+			
+
+entity - folder 
+
+	@EntityListeners(AuditingEntityListener.class)	
+	UserEntity //map this class with @Entity 
+	
+	userId
+	firstName	
+	email
+	password 
+	
+	@Temportal(TemporalType.TIMESTAMP)
+	@CrearedDate
+	createdAt
+	
+	@Temportal(TemporalType.TIMESTAMP)
+	@LastModifiedDate 
+	updatedAt 
+	
+		
+	@EnableJpaAuditing in our main application class  -- @SpringBootApplication 
+
+
+
+repository -- folder 
+
+@Repository 
+interface UserRepository<UserEntity,Long> extends JpaRepository 
+
+
+now we can create and access instance of UserRepository in any controller using 
+@Autowired , so jump to the SessionController and use it. 
+
+.....
+	userRepository.save(user); 
+...
+
+--------------------------------------------------------------------------------------
+
+
+
+
+
+
+
+
+
+
+
+		
+		
