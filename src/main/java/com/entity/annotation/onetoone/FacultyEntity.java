@@ -17,37 +17,30 @@ public class FacultyEntity {
 	int facultyId;
 
 	String firstName;
-	
-	
-	@OneToOne(cascade=CascadeType.ALL)
+
+	@OneToOne(cascade = CascadeType.ALL)
 	@PrimaryKeyJoinColumn
 	OfficeEntity office;
-
 
 	public int getFacultyId() {
 		return facultyId;
 	}
 
-
 	public void setFacultyId(int facultyId) {
 		this.facultyId = facultyId;
 	}
-
 
 	public String getFirstName() {
 		return firstName;
 	}
 
-
 	public void setFirstName(String firstName) {
 		this.firstName = firstName;
 	}
 
-
 	public OfficeEntity getOffice() {
 		return office;
 	}
-
 
 	public void setOffice(OfficeEntity office) {
 		this.office = office;
