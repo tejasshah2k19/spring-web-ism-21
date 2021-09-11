@@ -194,6 +194,67 @@ select => lazy | eager
 join => eager
 subselect*  
 
+------------------------------------------------------------------------------
+HIBERNATE OBJECT STATES :- 
+1) transient
+2) persistance 
+3) detached 
+
+
+
+@Entity 
+class Student{
+
+
+}
+
+
+Student s  = new Student(); // we can say that this is transient state 
+s.setFirstName("ram");
+s.setEmail("ram@gmail.com");
+//instance of student is not associated with any session or not save/persist in database. 
+//here if we required , we can free student instance s using gc. 
+
+//now we store the record of student into database 
+session.save(s); // now it's persistent 
+
+
+session.close(); 
+
+System.out.println(s.getFirstName()); // instance is now in detached state 
+//still we can modify the attributes/value/variable and later we can opne new session and update 
+//records 
+
+------------------------------------------------------------------------------
+
+ 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
