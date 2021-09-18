@@ -61,6 +61,70 @@ now we can create and access instance of UserRepository in any controller using
 
 --------------------------------------------------------------------------------------
 
+spring security --> spring 
+
+1) authentication -- login
+2) authorization  -- ROLE
+
+urls
+public --> faq , signup , login 
+private --> view orders , place order 
+	secure --> ProductManage 
+
+
+configuration 
+
+encrypted ---> ??algo?? plain text 
+password 
+-----------------------------------------------------
+how ???
+email,password ? 
+filters -->  
+		AuthenticationManager 
+			AuthenticationProvider
+				how? 
+					1) inMemoryDatabase 
+					2) database
+-----------------------------------------------------
+  
+form based authentication --login -- db / inmemory  
+FormBasedAuthentication 
+
+basicAuthentication
+BasicAuthentication 
+basic auth --> code 
+base64 
+
+
+-----------------------------------------------------
+configuration 	
+		1) xml 
+		2) annotation 
+		3) java 
+ 
+-----------------------------------------------------
+
+
+
+
+java.lang.IllegalArgumentException: There is no PasswordEncoder mapped for the id "null"
+	at org.springframework.security.crypto.password.DelegatingPasswordEncoder$UnmappedIdPasswordEncoder.matches(DelegatingPasswordEncoder.java:254) ~[spring-security-crypto-5.5.2.jar:5.5.2]
+
+
+
+
+-----------------------------------------------------
+IoC -> 
+BCryptPasswordEncoder -> 1) singleton 2) entire application
+spring.xml
+<bean id="objName" class="BCryptPasswordEncoder"></bean>
+
+
+
+
+
+
+
 
 
 

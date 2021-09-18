@@ -1,0 +1,101 @@
+-----------------------------------------------------
+spring security is a framework that manage authentication and authorization with powerful and highly customizable. 
+
+
+1) Authentication
+2) Authorization 
+
+ 
+ --> inMemory -> user --> data --> server's memory ,collection
+     file storage 
+     data base 
+     storage 
+     
+--->
+	session fixation
+	cross site request forgery 
+	api - auhtToken
+	encryption algo for password 
+	 
+--------------------------------------------------------------------------
+how to implement? 
+1)
+	pom.xml
+	jar 
+	spring-boot-starter-security 		
+ 
+ once you add this lib , security is enable 
+ default username is user and 
+ password you can read your console you will get 
+ 
+ 
+ customize our security configuration 
+ 
+ 2) create folder -> config 
+ 	  1) MySecurityConfig  
+ 	
+ 		*@Configuration
+ 		*@EnableWebSecurity 
+ 
+
+	 2)  extends WebSecurityConfigureAdapter  
+	 
+	 
+	 3) url 
+		configure(HttpSecurity http){
+			http.
+			authorizeRequest()
+			.anyRequest()
+			.authenticated()
+			.and()
+			.httpBasic();  // prompt username - password 
+			
+			//.formLogin()    //logout 
+		}	 
+	 //start your app and check 
+	 username => user
+	 password => read your console 
+	 
+	 
+	 4) authentication - in memory/db -> how? 
+	
+		configure(AuthenticationManagerBuilder auth){ 
+			auth.inMemoryAuthentication().withUser("tejas").password(this.passwordEncoder().encode("tejas")).roles("USER");
+			auth.inMemoryAuthentication().withUser("prisha").password(this.passwordEncoder().encode("prisha")).roles("USER");
+			auth.inMemoryAuthentication().withUser("admin").password(this.passwordEncoder().encode("admin")).roles("ADMIN");
+			auth.inMemoryAuthentication().withUser("royal").password(this.passwordEncoder().encode("royal")).roles("ADMIN");
+		}		
+
+
+	5) BCryptPasswordEncoder -> spring bean 
+       
+	@Bean 
+	public PasswordEncoder passwordEncoder(){
+		return new BCryptPasswordEncoder(10);
+	} 
+
+
+
+
+
+
+
+
+
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+
+
+	 
+	
