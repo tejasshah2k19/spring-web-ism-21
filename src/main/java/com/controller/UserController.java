@@ -5,10 +5,12 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.repository.UserRepository;
 
 @Controller
+@RequestMapping("/users")
 public class UserController {
 	@Autowired
 	UserRepository userRepo;
@@ -23,7 +25,7 @@ public class UserController {
 //		return mv;
 //	}
 
-	@GetMapping("/users")
+	@GetMapping(value = { "/users", "/" })
 	public String getAllUsers(Model model) {
 
 		model.addAttribute("users", userRepo.findAll());

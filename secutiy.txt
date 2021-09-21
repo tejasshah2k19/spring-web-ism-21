@@ -76,6 +76,43 @@ how to implement?
 
 
 
+--------------------------------------------------------------------------
+
+custom login 
+
+1) HttpSecurity 
+	-> formLogin().
+		loginPage("loginPageUrl")
+		
+2) Login.jsp
+		csrf toke enable
+		action => login 
+		method => post
+		data => username,password 
+	
+		use jstl for invalid loging message 		
+--------------------------------------------------------------------------
+		
+add repo / db support
+
+we need to change AuthenticationManagerBuilder => config class 
+
+1) username password  -> login post -> CustomUserDetails implements UserDetails  
+2) CustomUserDetails
+3) CustomUserDetailsService implements UserDetailsService 
+ 
+ UserDetails{username,password,role} { UserEntity } 
+ UserDetailsService 
+
+
+
+
+
+
+
+
+
+
 
 
 
