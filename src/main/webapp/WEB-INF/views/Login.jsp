@@ -12,7 +12,7 @@
 
 	<form action="login" method="post">
 
-		Username: <input type="text" name="username" /><br> Password: <input
+		Email: <input type="text" name="email" /><br> Password: <input
 			type="password" name="password" /><br> <input type="hidden"
 			name="${_csrf.parameterName}" value="${_csrf.token}"> <input
 			type="submit" value="Login" />
@@ -22,6 +22,11 @@
 	<c:if test="${param.error != null}">
 		Invalid Credentials
 	</c:if>
+	
+	<c:if test="${param.logout != null}">
+		Logout done...
+	</c:if>
+	
 
 </body>
 </html>

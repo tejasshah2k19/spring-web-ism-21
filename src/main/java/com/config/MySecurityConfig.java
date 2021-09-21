@@ -18,15 +18,28 @@ public class MySecurityConfig extends WebSecurityConfigurerAdapter {
 
 	@Autowired
 	CustomUserDetailsService customUserDetailsService;
-
+//
 	protected void configure(HttpSecurity http) throws Exception {
 		http.csrf().csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse()).and().authorizeRequests()
 				.antMatchers("/users/**").hasRole("USER").antMatchers("/admin/**").hasRole("ADMIN")
-				.antMatchers("/public/**").permitAll().anyRequest().authenticated().and()
+				.antMatchers("/public/**","/logout").
+				permitAll().anyRequest().authenticated().and()
 //		.httpBasic();
-				.formLogin().loginPage("/public/login");
+				.formLogin().loginPage("/public/login")
+				.usernameParameter("email")
+				;
 	}
 
+	
+
+//	protected void configure(HttpSecurity http) throws Exception {
+//		http.csrf().disable().authorizeRequests()
+//				.antMatchers("/users/**").hasRole("USER").antMatchers("/admin/**").hasRole("ADMIN")
+//				.antMatchers("/public/**","/logout").
+//				permitAll().anyRequest().authenticated().and()
+////		.httpBasic();
+//				.formLogin().loginPage("/public/login");
+//	}
 //	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
 //		auth.inMemoryAuthentication().withUser("tejas").password(this.passwordEncoder().encode("tejas")).roles("USER");
 //		auth.inMemoryAuthentication().withUser("prisha").password(this.passwordEncoder().encode("prisha")).roles("USER");

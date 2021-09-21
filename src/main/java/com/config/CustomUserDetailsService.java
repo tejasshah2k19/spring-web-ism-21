@@ -14,14 +14,20 @@ public class CustomUserDetailsService implements UserDetailsService {
 
 	@Autowired
 	UserRepository userRepo;
-			//List 
+
+	// List
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-		UserEntity user = userRepo.findByUsername(username);
-		if(user == null) {
+		
+		//if(username.contains("@") ) {
+			//findByEmail 
+		//}else{ findByUsername()
+		
+		UserEntity user = userRepo.findByEmail(username);
+		if (user == null) {
 			throw new UsernameNotFoundException("Invalid credentials");
 		}
 		return new CustomUserDetails(user);
-		//ArrayList 
+		// ArrayList
 	}
 
 }

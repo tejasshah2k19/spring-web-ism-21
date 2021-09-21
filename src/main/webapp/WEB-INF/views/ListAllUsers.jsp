@@ -11,7 +11,7 @@
 	<h2>All Users</h2>
 
 
-	<a href="../logout">Logout</a>
+	<a href="/public/logout">Logout</a>
 	<br>
 
 	<table border="1">
