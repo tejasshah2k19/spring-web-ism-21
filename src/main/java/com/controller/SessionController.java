@@ -44,10 +44,10 @@ public class SessionController {
 	public String login() {
 		return "Login";
 	}
-	@GetMapping("/logout")
-	public String logout() {
-		//
-		return "Login";
-	}
+//	@GetMapping("/logout")
+//	public String logout() {
+//		//
+//		return "Login";
+//	}
 	
 }
